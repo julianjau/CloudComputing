@@ -1,0 +1,323 @@
+html{
+    overflow-x: hidden;
+}
+body {
+    font-family: "poppins", sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+
+nav {
+    position: fixed;
+    width: 80%;
+    top: 0;
+    display: flex;
+    background-color: #6491f1;
+    justify-content: space-between;
+    padding: 0.5rem 8rem 0.5rem ;
+    color: #fff;
+}
+
+
+.sub-menu{
+    display: flex;
+    gap: 16px;
+}
+
+.about{
+    cursor: pointer;
+}
+
+.ikon-dw{
+    cursor: pointer;
+}
+/* DATA */
+.gauge{
+    margin-top: 3.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.gauge-h{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    height: 260px;
+    width: 300px;
+}
+
+.label-ctn{
+    width: 95%;
+    display: flex;
+    background-color: #6491f1;
+    padding: 0.5rem 0 0.5rem 1rem;
+    gap: 20px;
+}
+.gauge-label {
+    font-weight: 500;
+    color: #fff;
+}
+
+.gauge-body {
+    margin-top: 50px;
+    position: relative;
+    width: 150px;
+    height: 75px;
+    overflow: hidden;
+    background: #e0e0e0;
+    border-radius: 75px 75px 0 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.gauge-fill {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(59, 89, 152, 0.4);
+    transform-origin: bottom;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-out;
+}
+
+.gauge-value {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3b5998;
+}
+
+
+/* grafik */
+
+
+.grf-suhu,
+.grf-temp{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.grf-suhu .label-suhu,
+.grf-temp .label-kelembaban{
+    display: flex;
+    background-color: #6491f1;
+    padding: 0.5rem 0 0.5rem 1rem;
+    color: #fff;
+}
+
+.containers {
+    /* background: rgba(255, 255, 255, 0.9); */
+    width: 98.8%;
+    height: 90%;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    opacity: 0;
+    transform: translateY(-110%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1000; /* Menempatkan elemen di atas */
+}
+
+.containers.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about:hover + .containers {
+    display: block;
+}
+
+
+.content{
+    padding: 0.1rem 2rem 0 2rem;
+    background-color: #ffffff;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.content-img{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.img-content{
+    width: 200px;
+    height: 200px;
+    margin-top: 1rem;
+    box-shadow: 0 0 10px rgba(59, 89, 152, 0.5);
+    border-radius: 50%;
+    background: transparent;
+}
+
+.img-box{
+        width: 200px; 
+        height: 200px;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 50%; 
+}
+
+.img-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%; /* Membuat gambar juga berbentuk lingkaran */
+}
+
+.name-img{
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+
+
+@media (max-width: 576px){
+    nav{
+        padding: 0.5rem 1rem;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 9999;
+    }
+
+    .gauge{
+
+        display: block;
+        margin-top: 3.5rem;
+    }
+
+    .gauge-h{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .gauge-container{
+        width: 100%;
+    }
+
+    canvas{
+        width: 100%;
+        height: 10px; 
+    }
+
+    .content{
+        height: 100%;
+    }
+
+    .main-ctn{
+        font-size: 10px;
+    }
+    /* .content-img{
+        flex-wrap: wrap;
+        position: relative;
+        top: -4rem;
+        gap: 10px;
+    }
+
+    .img-content{
+        width: 100px;
+        height: 100px;
+        margin-top: 1rem;
+        box-shadow: 0 0 10px rgba(59, 89, 152, 0.5);
+        border-radius: 50%;
+        background: transparent;
+        margin-top: 5rem;
+    }
+     */
+
+    /* .img-box img{
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+
+    /* .content-img{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    } */
+    
+
+    .content-img{
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        gap: 0.4rem;
+        top: -5rem;
+
+
+    }
+    .img-content{
+        width: 100px;
+        height: 100px;
+        margin-top: 1rem;
+        box-shadow: 0 0 10px rgba(59, 89, 152, 0.5);
+        border-radius: 50%;
+        background: transparent;
+        margin-top: 5rem;
+    }
+    
+    .img-box{
+            width: 100px; 
+            height: 100px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 50%; 
+    }
+    
+    .img-box img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%; /* Membuat gambar juga berbentuk lingkaran */
+    }
+    
+    .name-img{
+        position: relative;
+        left: -0.75rem;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        font-weight: 500;
+        width: 120px;
+        /* border: 1px solid; */
+    }
+
+
+    .name-img span{
+
+        font-size: 12px
+    };
+    
+}
+
+

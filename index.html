@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomTrack</title> 
+    <link rel="icon" href="logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.6/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    </head>
+</head>
+<body>
+
+    <nav>
+        <div class="container" style="display: flex; gap: 20px;">
+            <div class="ikon-nav"><i class="fa-solid fa-cloud" style="color: #ffffff;"></i></div>
+            <div class="container-nav">RoomTrack</div>
+        </div>
+        <div class="sub-menu">
+            <div class="about">Tentang Kami</div>
+            <div class="ikon-dw" id="download-btn"><i class="fa-solid fa-download" style="color: #ffffff;"></i></div>
+        </div>
+    </nav>
+        <!-- Gauges Section -->
+    <div class="gauge">
+        <div class="gauge-container">
+            <div class="label-ctn">
+                <div class="ikon-ctn"><i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff;"></i></div>
+                <div class="gauge-label">Suhu</div>
+            </div>
+            <div id="temp-gauge" class="gauge-body">
+                <div id="temp-fill" class="gauge-fill"></div>
+                <div id="temp-value" class="gauge-value">0°C</div>
+            </div>
+            <p id="temp-status" class="status">Suhu: Tidak Ada Data</p>
+        </div>
+        <div class="grf-suhu">
+            <div class="label-suhu">
+                Grafik Suhu
+            </div>
+            <div class="graf-suhu">
+                <canvas id="temperatureChart" style="width: 750px; height: 220px;"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="gauge-h" >
+        <div class="grf-temp">
+            <div class="label-kelembaban">
+                Grafik Kelembaban
+            </div>
+            <canvas id="humidityChart" style="width: 750px; height: 220px;"></canvas>
+        </div>
+        <div class="gauge-container">
+            <div class="label-ctn">
+                <div class="ikon-ctn"><i class="fa-solid fa-water" style="color: #ffffff;"></i></div>
+                <div class="gauge-label">Kelembaban</div>
+            </div>
+            <div id="humidity-gauge" class="gauge-body">
+                <div id="humidity-fill" class="gauge-fill"></div>
+                <div id="humidity-value" class="gauge-value">0%</div>
+            </div>
+            <p id="humidity-status" class="status">Kelembaban: Tidak Ada Data</p>
+        </div>
+    </div>
+    
+    <table id="data-table" style="display: none;">
+        <thead>
+            <tr>
+                <th>Waktu</th>
+                <th>Suhu (°C)</th>
+                <th>Kelembaban (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <table id="hidden-data-table" style="display: none;">
+        <thead>
+            <tr>
+                <th>Waktu</th>
+                <th>Suhu (°C)</th>
+                <th>Kelembaban (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be dynamically inserted here from JavaScript -->
+        </tbody>
+    </table>
+    
+
+
+    <div class="containers">
+        <div class="content"><h3>Tentang Aplikasi</h3>
+            <div class="main-ctn">
+                RoomTrack adalah platform inovatif berbasis Internet of Things (IoT) yang dirancang untuk memantau suhu dan kelembaban di dalam ruangan secara real-time. 
+                Dikembangkan sebagai bagian dari tugas akhir mata kuliah Komputasi Awan, RoomTrack menggabungkan teknologi sensor, komputasi awan, 
+                dan antarmuka pengguna yang ramah untuk memberikan pemantauan lingkungan yang mudah dan efektif.
+            </div>
+            <div class="tittle-img"><h3>Team Project</h3></div>
+            <div class="content-img">
+                <div class="img-content">
+                    <div class="img-box"><img src="img/Profil-foto.jpeg" alt="Julian"></div>
+                    <div class="name-img">
+                        <span>Julian Jau'hari
+                        <br>
+                        2101020004
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="img-content">
+                    <div class="img-box"><img src="img/Tiara.jpg" alt="Tiara Sonya"></div>
+                        <div class="name-img">
+                            <span>Tiara Sonya
+                                <br>
+                                2101020007
+                            </span>
+                        </div>
+                </div>
+                <div class="img-content">
+                    <div class="img-box"><img src="img/Rizky.jpeg" alt="Rizky Ramadhani Kalingga Putra"></div>
+                        <div class="name-img">
+                            <span>Rizky Ramadhani Kalingga Putra
+                                <br>
+                                2101020040
+                            </span>
+                        </div>
+                </div>
+                <div class="img-content">
+                    <div class="img-box"><img src="img/ahda.jpeg" alt="ahda Kamalia"></div>
+                        <div class="name-img">
+                            <span>Ahda Kamalia
+                                <br>
+                                2101020053
+                            </span>
+                        </div>
+                </div>
+                <div class="img-content">
+                    <div class="img-box"><img src="img/Febriandi.jpeg" alt="Julian"></div>
+                        <div class="name-img">
+                            <span>Febriandi
+                                <br>
+                                2101020062
+                            </span>
+                        </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Section -->
+
+    <script src="js/app2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+</body>
+</html>
